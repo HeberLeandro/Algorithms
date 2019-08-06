@@ -1,3 +1,6 @@
+#ifndef _veiculo_H_
+#define _veiculo_H_
+
 #include <iostream>
 #include <string>
 
@@ -44,4 +47,21 @@ class Veiculo {
 		void setNumRodas(int);
 		int getNumRodas();
 };
+
+class Terrestre : public Veiculo {
+	
+	public:
+		Terrestre(const char * nome);
+	
+};
+
+class Aquatico : public Veiculo {
+	
+};
+
+class Aereo : public Veiculo {
+	
+};
+
+#endif
 

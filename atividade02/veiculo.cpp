@@ -1,7 +1,6 @@
 #include <string>
-#ifndef VEICULO_H // if
 #include "veiculo.h"
-#endif // END IF
+
 
 
 void Veiculo::setNumRodas(int tam) {
@@ -18,5 +17,8 @@ int Veiculo::getNumRodas(){
 		++aux;
 	}
 	return i;
+}
+
+Terrestre::Terrestre(const char *nome) : Veiculo(nome){
 }
 
