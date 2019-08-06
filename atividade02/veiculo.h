@@ -53,15 +53,15 @@ class Veiculo {
 
 
 
-class Terrestre : public virtual Veiculo {
+class Terrestre : virtual public Veiculo {
 	
 	private:
-		int cap_pass = 5;
+		int cap_pass;
 		
 	protected:
 		Terrestre(const char * nome) : Veiculo(nome) {//: Veiculo(const char*nome) {
 			this->cap_pass = 5;
-			cout << "O veiculo Terrestre: foi criado!" << endl;
+			cout << "O veiculo Terrestre: "<< this->nome << " foi criado!" << endl;
 		}
 		public:	
 		virtual ~Terrestre(){
@@ -76,16 +76,16 @@ class Terrestre : public virtual Veiculo {
 
 
 
-class Aquatico : public virtual Veiculo {
+class Aquatico : virtual public Veiculo {
 	
 	private:
-		float carga_max = 10;
+		float carga_max;
 		
 	protected:
 		
 		Aquatico(const char * nome) : Veiculo(nome) {//: Veiculo(const char*nome){
 			this->carga_max = 10;
-			cout << "O veiculo Aquatico: foi criado!" << endl;
+			cout << "O veiculo Aquatico: " << this->nome << " foi criado!" << endl;
 		}
 		
 	public:	
