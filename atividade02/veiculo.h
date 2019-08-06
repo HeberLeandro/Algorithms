@@ -37,7 +37,8 @@ class Veiculo {
 
 			cout << "O veiculo: "<< this->nome <<" foi criado!" << endl;
 		}
-	virtual	~Veiculo(){
+
+		virtual	~Veiculo(){
 
 			cout << "O veiculo: " << this->nome << ", foi destruido!" << endl;
 			delete [] rodas;
@@ -58,9 +59,10 @@ class Terrestre : public virtual Veiculo {
 		int cap_pass = 5;
 		
 	protected:
-		Terrestre(const char *nome) : Veiculo(nome){
+		Terrestre(const char * nome) : Veiculo(nome) {//: Veiculo(const char*nome) {
+			this->cap_pass = 5;
 			cout << "O veiculo Terrestre: foi criado!" << endl;
-		
+		}
 		public:	
 		virtual ~Terrestre(){
 			cout << "O veiculo Terrestre: "<< this->nome <<" foi Destruido!" << endl;
@@ -81,12 +83,13 @@ class Aquatico : public virtual Veiculo {
 		
 	protected:
 		
-		Aquatico(const char *nome) : Veiculo(nome){
+		Aquatico(const char * nome) : Veiculo(nome) {//: Veiculo(const char*nome){
+			this->carga_max = 10;
 			cout << "O veiculo Aquatico: foi criado!" << endl;
 		}
 		
 	public:	
-		
+	
 		virtual ~Aquatico(){
 			cout << "O veiculo Aquatico: "<< this->nome <<" foi Destruido!" << endl;
 		}
@@ -100,10 +103,11 @@ class Aquatico : public virtual Veiculo {
 class Aereo : public Veiculo {
 	
 	private: 
-		float vel_max = 100;
+		float vel_max;
 	
 	public:
-		Aereo(const char *nome) : Veiculo(nome){
+		Aereo(const char * nome) : Veiculo(nome) { //(const char *nome) : Veiculo(nome){
+			this->vel_max = 100;
 			cout << "O veiculo Aereo: "<< this->nome <<" foi criado!" << endl;
 		}
 		
@@ -120,7 +124,14 @@ class Aereo : public Veiculo {
 class Anfibio : public Terrestre, public Aquatico {
 	
 	public:
-		Anfibio (const char * nome) : Veiculo(nome), Terrestre(), Aquatico() {}
+		Anfibio (const char * nome) : Veiculo(nome), Terrestre(nome), Aquatico(nome) {
+			cout << "O veiculo Anfibio: "<< this->nome <<" foi criado!" << endl;
+		}
+		virtual ~Anfibio(){
+			cout << "O veiculo Anfibio: "<< this->nome <<" foi Destruido!" << endl;
+		}
+
+		void mover();
 	
 };
 

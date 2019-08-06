@@ -16,9 +16,10 @@ int main() {
 	//((Terrestre *) terr)->setCap_pass(45);
 	//terr->mover();
 	
-	//aqua = new Aquatico("VQ1");
+	//Veiculo *aqua = new Aquatico("VQ1");
+	//dynamic_cast<Aquatico*>(aqua)->mover();
 	//((Aquatico *) aqua)->setCarga_max(12.5);
-	//aqua->mover();
+	
 	
 	//aereo = new Aereo("VA1");
 	//((Aereo *) aereo)->setVel_max(1040.5);
@@ -29,17 +30,14 @@ int main() {
 	//delete aereo;
 	
 	
-	Anfibio * sla = new Anfibio("sla");
+	Veiculo *anfi  = new Anfibio("anfi");
+	
+	anfi->mover();
+	
+	delete anfi;
 	
 	
-	
-	
-	
-	
-	
-	system("PAUSE");
-	
+
 	return 0;
-	
 }
 

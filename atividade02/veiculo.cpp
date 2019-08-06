@@ -59,3 +59,10 @@ void Aereo::mover(){
 	cout << "Veiculo Aereo " << this->nome << " moveu" << endl;
 }
 
+//Anfibio 
+
+void Anfibio ::mover(){
+	
+	Terrestre::mover();
+	Aquatico::mover(); 
+}
