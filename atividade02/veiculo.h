@@ -131,7 +131,7 @@ class Anfibio : public Terrestre, public Aquatico {
 			cout << "O veiculo Anfibio: "<< this->nome <<" foi Destruido!" << endl;
 		}
 
-		void mover();
+		virtual void mover();
 	
 };
 

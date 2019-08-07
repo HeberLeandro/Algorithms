@@ -60,7 +60,6 @@ void Aereo::mover(){
 }
 
 //Anfibio 
-
 void Anfibio ::mover(){
 	
 	Terrestre::mover();
