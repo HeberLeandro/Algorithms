@@ -1,8 +1,6 @@
 #include <iostream>
 #include <stdio.h>
-#ifndef VEICULO_CPP // if
-#include "veiculo.cpp"
-#endif // END IF
+#include "veiculo.h"
 
 using namespace std;
 
@@ -18,7 +16,8 @@ int main() {
 
 
 	Veiculo *v1 = new Veiculo("Gol");
-	v1->setNumRodas(4);
+	v1->setNumRodas(2);
+	v1->setNumRodas(2);
 	cout << "O veiculo tem: " << v1->getNumRodas() << " Rodas." << endl;
 
 	delete v1;

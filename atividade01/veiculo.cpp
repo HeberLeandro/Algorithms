@@ -1,22 +1,21 @@
 #include <string>
-#ifndef VEICULO_H // if
 #include "veiculo.h"
-#endif // END IF
+
 
 
 void Veiculo::setNumRodas(int tam) {
+	
+	if(this->rodas != NULL){
+		delete [] this->rodas;
+	}
+	
 	Roda * Vrodas = new Roda[tam];
-	this->rodas = &Vrodas[0];
+	Vrodas[0].totalRodas = tam;
+	this->rodas = Vrodas;
 }
 
 int Veiculo::getNumRodas(){
-	int i = 0;
-	Roda *aux = this->rodas;
-
-	while(aux->roda == 1){
-		i += aux->roda;
-		++aux;
-	}
-	return i;
+	
+	return this->rodas->totalRodas;
 }
 

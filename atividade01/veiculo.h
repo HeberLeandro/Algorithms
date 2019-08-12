@@ -1,3 +1,6 @@
+#ifndef _veiculo_H_
+#define _veiculo_H_
+
 #include <iostream>
 #include <string>
 
@@ -7,10 +10,10 @@ class Roda {
 
 	public:
 
-		int roda;
+		int totalRodas;
 
 		Roda(){
-			this->roda = 1;
+			this->totalRodas = 0;
 			cout << "Roda adicionada" << endl;
 		}
 
@@ -44,4 +47,6 @@ class Veiculo {
 		void setNumRodas(int);
 		int getNumRodas();
 };
+
+#endif
 
