@@ -30,7 +30,7 @@ class Arranjo {
 			return this->items[idx];
 		}
 		
-		virtual void set(int idx, const T & item) {
+		virtual void set(int idx, const T &item) {
 		// set o item do array apontado pelo indice usando =
 			this->items[idx] = item;
 		}
