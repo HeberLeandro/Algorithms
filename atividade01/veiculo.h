@@ -9,11 +9,7 @@ using namespace std;
 class Roda {
 
 	public:
-
-		int totalRodas;
-
 		Roda(){
-			this->totalRodas = 0;
 			cout << "Roda adicionada" << endl;
 		}
 
@@ -25,15 +21,15 @@ class Roda {
 class Veiculo {
 
 	private:
+		int totalRodas;
 		string nome;
 		Roda *rodas;
 
 	public:
 		Veiculo(const char *string) {
-
+			this->totalRodas = 0;
 			this->rodas = NULL;
 			this->nome = string;
-
 
 			cout << "O veiculo: "<< this->nome <<" foi criado!" << endl;
 		}

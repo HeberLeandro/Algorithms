@@ -1,21 +1,16 @@
-#include <string>
 #include "veiculo.h"
 
 //VEICULO
 //void Veiculo::setNumRodas(int tam) {
-//	Roda * Vrodas = new Roda[tam];
-//	this->rodas = &Vrodas[0];
+// 
+//	delete [] this->rodas;
+//	this->rodas= new Roda[tam];
+//	this->totalRodas = tam;
 ///}
 
 //int Veiculo::getNumRodas(){
-//	int i = 0;
-//	Roda *aux = this->rodas;
 
-//	while(aux->roda == 1){
-//		i += aux->roda;
-//		++aux;
-//	}
-//	return i;
+//	return this->totalRodas;
 //}
 
 

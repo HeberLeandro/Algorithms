@@ -9,11 +9,8 @@ using namespace std;
 class Roda {
 
 	public:
-
-		int roda;
-
+		
 		Roda(){
-			this->roda = 1;
 			cout << "Roda adicionada" << endl;
 		}
 
@@ -27,6 +24,7 @@ class Veiculo {
 	protected:
 		string nome;
 		Roda *rodas;
+		int totalRodas;
 
 	public:
 		Veiculo(const char *string) {
@@ -59,7 +57,12 @@ class Terrestre : virtual public Veiculo {
 		int cap_pass;
 		
 	protected:
-		Terrestre(const char * nome) : Veiculo(nome) {//: Veiculo(const char*nome) {
+		Terrestre() : Veiculo("Terr") {
+		}
+		
+		
+	public:
+		Terrestre(const char * nome) : Veiculo(nome) {
 			this->cap_pass = 5;
 			cout << "O veiculo Terrestre: "<< this->nome << " foi criado!" << endl;
 		}
@@ -82,13 +85,14 @@ class Aquatico : virtual public Veiculo {
 		float carga_max;
 		
 	protected:
-		
+		Aquatico() : Veiculo("Aqua") {
+		}
+				
+	public:			
 		Aquatico(const char * nome) : Veiculo(nome) {//: Veiculo(const char*nome){
 			this->carga_max = 10;
 			cout << "O veiculo Aquatico: " << this->nome << " foi criado!" << endl;
 		}
-		
-	public:	
 	
 		virtual ~Aquatico(){
 			cout << "O veiculo Aquatico: "<< this->nome <<" foi Destruido!" << endl;
@@ -124,7 +128,7 @@ class Aereo : public Veiculo {
 class Anfibio : public Terrestre, public Aquatico {
 	
 	public:
-		Anfibio (const char * nome) : Veiculo(nome), Terrestre(nome), Aquatico(nome) {
+		Anfibio (const char * nome) : Veiculo(nome), Terrestre(), Aquatico() {
 			cout << "O veiculo Anfibio: "<< this->nome <<" foi criado!" << endl;
 		}
 		virtual ~Anfibio(){
