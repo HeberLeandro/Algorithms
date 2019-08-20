@@ -1,25 +1,41 @@
 #ifndef _funcoes_H_
 #define _funcoes_H_
+#include <cstring>
 
-void trocar(int &a, int &b){
-	int aux = a;
-	a = b;
-	b = aux;
+
+namespace funcoes{
 	
-}
-
-int maximo(const int a, const int b){
+	template <class T>
+	void trocar(T &a, T &b){
+		T aux = a;
+		a = b;
+		b = aux;
+		
+	}
 	
-	if(a > b) return a;
-	else if(a < b) return b;
-	else return a; 
-}
-
-int minimo(const int a, const int b){
+	template <class T>
+	T maximo(const T a, const T b){
+		
+		if(a > b) return a;
+		else if(a < b) return b;
+		else return a; 
+	}
 	
-	if(a > b) return b;
-	else if(a < b) return a;
-	else return a;
+	template <char * T> 
+	char maximo(const char * a, const char * b){
+		
+		if(strcmp(a,b) > 0 ) return a;
+		else if(strcmp(a,b) < 0 ) return b;
+		else return a; 
+	}
+	
+	
+	template <class T>
+	T minimo(const T a, const T b){
+		
+		if(a > b) return b;
+		else if(a < b) return a;
+		else return a;
+	}
 }
-
 #endif
