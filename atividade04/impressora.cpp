@@ -15,7 +15,7 @@
 
 using namespace std;
 
-/*int main() {
+int main() {
 	Fila<int> impressora(10);
 	int i = 0;
 	while (1) {
@@ -38,6 +38,6 @@ using namespace std;
 
 		PAUSA(1);
 	}
-}*/
+}
 
 

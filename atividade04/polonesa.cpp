@@ -47,10 +47,22 @@ int polonesa(const char * exp) {
 	return pilha.desempilha();
 }
 
-/*int main() {
-	cout << polonesa("23+31-*") << endl;
-	cout << polonesa("93*42/-") << endl;
-}*/
+//int main() {
+//	
+//	cout << polonesa("23+31-*") << endl;
+//	cout << polonesa("93*42/-") << endl;
+////
+////	Pilha<int> pilha(10);
+////	pilha.empilha(3);
+////	pilha.empilha(2);
+////	pilha.empilha(1);
+////	cout << pilha.desempilha() << endl;
+////	cout << pilha.desempilha() << endl;
+////	cout << pilha.desempilha() << endl;
+//	
+//	return 0;
+//	
+//}
 
 
 

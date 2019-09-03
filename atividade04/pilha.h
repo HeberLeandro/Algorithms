@@ -8,11 +8,41 @@ template <class T>
 class Pilha {
 	
 	private:
-		int capacidade, topo;	
+		int capacidade, Nitems, topo;
+		T * items;
 		
 	public:
 		Pilha(int capacidade){
-					
+			this->items = new T[capacidade];
+			this->topo =  -1;
+			this->capacidade = capacidade;
+			this->Nitems = 0;		
+		}
+		
+		~Pilha(){
+			delete [] items;
+		}
+		
+		void empilha(T item) {
+			if(this->Nitems < this->capacidade){
+				this->topo += 1;	
+				this->items[this->topo] = item;
+				this->Nitems += 1;
+			
+			}else{
+				cout << "Overflow!" << endl;
+			}
+		}
+		
+		T desempilha(){
+			if(this->Nitems > 0){
+				int aux = this->topo;
+				this->topo -= 1;
+				this->Nitems -= 1;			
+				return this->items[aux];
+			}else {
+				cout << "Underflow!" << endl;
+			}
 		}
 };
 
