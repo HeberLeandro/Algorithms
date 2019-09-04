@@ -25,9 +25,9 @@ class Fila {
 		
 		void enfileira(const T & item){
 			if(this->Nitems < this->capacidade){
-				this->inicio += 1;	
+				this->inicio++;	
 				this->items[(this->inicio + this->Nitems) % this->capacidade] = item;
-				this->Nitems += 1;
+				this->Nitems++;
 			}else{
 				cout << "Overflow!" << endl;
 			}
@@ -35,10 +35,8 @@ class Fila {
 		
 		T desenfileira(){
 			if(this->Nitems > 0){
-				int aux = this->inicio;
-				this->inicio = (this->inicio + 1) % this->capacidade;
-				this->Nitems -= 1;			
-				return this->items[aux];
+				this->Nitems--;			
+				return this->items[(this->inicio + 1) % this->capacidade];
 			}else {
 				cout << "Underflow!" << endl;
 			}

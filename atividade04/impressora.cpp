@@ -9,7 +9,7 @@
 
 #include <thread>
 #include <chrono>
-#define PAUSA(tempo) std::this_thread::sleep_for(std::chrono::milliseconds(tempo * 1000));
+#define PAUSA(tempo) std::this_thread::sleep_for(std::chrono::milliseconds(tempo * 100));
 
 #include "fila.h"
 
