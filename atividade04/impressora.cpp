@@ -11,33 +11,33 @@
 #include <chrono>
 #define PAUSA(tempo) std::this_thread::sleep_for(std::chrono::milliseconds(tempo * 100));
 
-#include "fila.h"
+//#include "fila.h"
 
 using namespace std;
 
-int main() {
-	Fila<int> impressora(10);
-	int i = 0;
-	while (1) {
-		// 70% de chance do usuário mandar imprimir um documento
-		if ((rand() % 100) < 70) {
-			if (!impressora.cheia()) {
-				cout << "Adicionado documento " << ++i << endl;
-				impressora.enfileira(i);
-			}
-		}
-
-		cout << "Status: " << impressora.tamanho() << " item(s) na fila" << endl;
-
-		// 50% de chance da impressora imprimir um documento
-		if ((rand() % 100) < 50) {
-			if (!impressora.vazia()) {
-				cout << "Imprimindo documento " << impressora.desenfileira() << endl;
-			}
-		}
-
-		PAUSA(1);
-	}
-}
+//int main() {
+//	Fila<int> impressora(10);
+//	int i = 0;
+//	while (1) {
+//		// 70% de chance do usuário mandar imprimir um documento
+//		if ((rand() % 100) < 70) {
+//			if (!impressora.cheia()) {
+//				cout << "Adicionado documento " << ++i << endl;
+//				impressora.enfileira(i);
+//			}
+//		}
+//
+//		cout << "Status: " << impressora.tamanho() << " item(s) na fila" << endl;
+//
+//		// 50% de chance da impressora imprimir um documento
+//		if ((rand() % 100) < 50) {
+//			if (!impressora.vazia()) {
+//				cout << "Imprimindo documento " << impressora.desenfileira() << endl;
+//			}
+//		}
+//
+//		PAUSA(1);
+//	}
+//}
 
 
