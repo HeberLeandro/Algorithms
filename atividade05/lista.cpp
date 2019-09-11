@@ -8,9 +8,9 @@
 #include "lista2.h"
 using namespace std;
 
-int main3() {
+int main() {	
 	Lista<char> lista(10);
-
+	
 	lista.adiciona('a');	// a
 	lista.adiciona('b');	// a b
 	lista.adiciona('c');	// a b c
@@ -21,13 +21,13 @@ int main3() {
 	lista.remove(3); 		// a b d e
 	lista.exibe(); 			// a b d e (saída)
 
-	cout << lista.pega(4) << endl; 			// e
+	cout << lista.pega(4) << endl;// e
 	lista.insere(2, 'f'); 	// a f b d e
 	lista.exibe(); 			// a f b d e (saída)
 
 	lista.adiciona('g'); 	// a f b d e g
 	lista.insere(4, 'h'); 	// a f b h d e g
-	cout << lista.pega(2) << endl; 			// f
+	cout << lista.pega(2) << endl;// f
 	lista.exibe(); 			// a f b h d e g (saída)
 	
 	return 0;

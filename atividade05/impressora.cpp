@@ -9,13 +9,13 @@
 
 #include <thread>
 #include <chrono>
-#define PAUSA(tempo) std::this_thread::sleep_for(std::chrono::milliseconds(tempo * 100));
+#define PAUSA(tempo) std::this_thread::sleep_for(std::chrono::milliseconds(tempo * 1000));
 
 #include "fila2.h"
 
 using namespace std;
 
-int main() {
+int main2() {
 	Fila<int> impressora(10);
 	int i = 0;
 	while (1) {

@@ -5,16 +5,24 @@
 using namespace std;
 
 template <class T>
+struct Node {
+	T dados;
+	struct Node * prox;
+};
+
+template <class T>
 class Lista {
 	
 	private:
 		int capacidade, Nitems;
-		T * items;
+		Node<T> *inicio;
+		Node<T> *final;
 	
 	public:
 		Lista(int capacidade) {
 		// inicilização do array, capacidade e tamanho
-			this->items = new T[capacidade];
+			this->inicio = NULL;
+			this->final = NULL;
 			this->capacidade = capacidade;
 			this->Nitems = 0;
 		}
@@ -22,14 +30,27 @@ class Lista {
 		
 		~Lista() {
 		//destruição do array
-			delete [] items;
+			while(this->inicio != NULL){
+				Node<T> *aux = this->inicio;
+				this->inicio = this->inicio->prox;
+				delete aux;
+			}
+			delete this->inicio;
 		}
 		
 		void adiciona (const T & item) {
 		// adiciona um item ao final da lista; lança “Lista cheia” caso cheia
-			if(Nitems < capacidade){
-				items[Nitems] = item;
-				Nitems++; 
+			if(this->Nitems < this->capacidade){
+				Node<T> *novoNode = new Node<T>;
+				novoNode->dados = item;
+				novoNode->prox = NULL;
+				if(this->inicio == NULL){
+					this->inicio = novoNode;
+				}else{
+					this->final->prox = novoNode;
+				}
+				this->final = novoNode;
+				this->Nitems++; 
 			}else {
 				cout << "Lista cheia!" << endl;
 			}
@@ -39,7 +60,14 @@ class Lista {
 		// pega um item pelo indice (começa em 1);
 		// lança “Item inválido” se posição inválida
 			if(idx > 0 && idx <= Nitems){
-				return items[idx-1];
+				Node<T> *aux = this->inicio;
+				idx -= 1;
+				while(idx > 0){
+					aux = aux->prox;
+					idx--;
+				}
+				return aux->dados;
+				
 			}else{
 				cout << "Item inválido!" << endl;
 			}
@@ -52,11 +80,23 @@ class Lista {
 		// lança “Item inválido” se posição inválida
 		// desloca itens existentes para a direita
 			if((idx > 0 && idx <= Nitems) && Nitems < capacidade){
-				for(int i = capacidade-1; i >= idx; i--){
-					items[i] = items[i-1];
+				Node<T> *novoNode = new Node<T>;
+				novoNode->dados = item;
+				novoNode->prox = NULL;
+				if(idx == 1){
+					novoNode->prox = this->inicio;
+					this->inicio = novoNode;
+				}else {
+					Node<T> *aux = this->inicio;
+					idx -= 2;
+					while(idx > 0) {
+						aux = aux->prox;
+						idx--;
+					}
+					novoNode->prox = aux->prox;
+					aux->prox = novoNode;
 				}
-				items[idx-1] = item;
-				Nitems++;
+				this->Nitems++;
 			}else{
 				cout << "Lista cheia ou item inválido!" << endl;
 			}
@@ -67,10 +107,28 @@ class Lista {
 		// lança “Item inválido” se posição inválida
 		// desloca itens para a esquerda sobre o item removido
 			if(idx > 0 && idx <= Nitems){
-				for(int i = idx-1; i < capacidade -1; i++){
-					items[i] = items[i+1];
+				Node<T> *aux;
+				if(idx == 1){
+					aux = this->inicio;
+					this->inicio = this->inicio->prox;
+					if(aux == this->final){
+						this->final = NULL;
+					}
+				}else {
+					aux = this->inicio;//aux = anterior
+					Node<T> *tmp;
+					idx -= 2;
+					while(idx > 0) {
+						aux = aux->prox;
+						idx--;
+					}
+					tmp = aux->prox;
+					aux->prox = tmp->prox;
+					if(this->final == tmp){
+						this->final = aux;
+					}	
 				}
-				Nitems--;
+				this->Nitems--;
 			}else{
 				cout << "item inválido!" << endl;
 			}
@@ -78,11 +136,15 @@ class Lista {
 		
 		void exibe() {
 		// exibe os itens da saida padrão separados por espaços
-			for(int i = 0; i < Nitems; i++){
-				cout << items[i] << " ";
+			Node<T> *aux = this->inicio;
+			int i = this->Nitems;
+			while(i > 0){
+				cout << aux->dados << " ";
+				aux = aux->prox;
+				i--;
 			}
 			cout << endl;
-		}
+		}	
 };
 
 #endif

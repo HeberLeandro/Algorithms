@@ -27,13 +27,25 @@ class Fila {
 		}
 		
 		~Fila(){
-			delete this;
+			while(this->inicio != NULL){
+				Node<T> *aux = this->inicio;
+				this->inicio = this->inicio->prox;
+				delete aux;
+			}
+			delete this->inicio;
 		}
 		
 		void enfileira(const T & item){
 			if(this->Nitems < this->capacidade){
-				this->inicio;	
-				this->items[(this->inicio + this->Nitems) % this->capacidade] = item;
+				Node<T> *novoNode = new Node<T>;
+				novoNode->dados = item;
+				novoNode->prox = NULL;
+				if(this->inicio == NULL){
+					this->inicio = novoNode;
+				}else{
+					this->final->prox = novoNode;
+				}
+				this->final = novoNode;
 				this->Nitems++;
 			}else{
 				cout << "Overflow!" << endl;
@@ -42,8 +54,13 @@ class Fila {
 		
 		T desenfileira(){
 			if(this->Nitems > 0){
-				this->Nitems--;			
-				return this->items[(this->inicio + 1) % this->capacidade];
+				Node<T> *aux = this->inicio;
+				this->inicio = this->inicio->prox;
+				if(this->inicio == NULL){
+					this->final = NULL;
+				}
+				this->Nitems--;						
+				return aux->dados;
 			}else {
 				cout << "Underflow!" << endl;
 			}
