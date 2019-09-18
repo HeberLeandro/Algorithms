@@ -1,6 +1,7 @@
 #ifndef _lista_H_
 #define _lista_H_
 
+#include <stdexcept>
 #include <iostream>
 using namespace std;
 
@@ -28,10 +29,9 @@ class Lista {
 		void adiciona (const T & item) {
 		// adiciona um item ao final da lista; lança “Lista cheia” caso cheia
 			if(Nitems < capacidade){
-				items[Nitems] = item;
-				Nitems++; 
+				items[Nitems++] = item; 
 			}else {
-				cout << "Lista cheia!" << endl;
+				throw overflow_error("Overflow");
 			}
 		}
 		
@@ -41,7 +41,7 @@ class Lista {
 			if(idx > 0 && idx <= Nitems){
 				return items[idx-1];
 			}else{
-				cout << "Item inválido!" << endl;
+				throw underflow_error("Item invalido");
 			}
 		
 		}
@@ -52,13 +52,13 @@ class Lista {
 		// lança “Item inválido” se posição inválida
 		// desloca itens existentes para a direita
 			if((idx > 0 && idx <= Nitems) && Nitems < capacidade){
-				for(int i = capacidade-1; i >= idx; i--){
+				for(int i = Nitems-1; i >= idx; i--){
 					items[i] = items[i-1];
 				}
 				items[idx-1] = item;
 				Nitems++;
 			}else{
-				cout << "Lista cheia ou item inválido!" << endl;
+				throw overflow_error("Overflow");
 			}
 		}
 		
@@ -67,12 +67,12 @@ class Lista {
 		// lança “Item inválido” se posição inválida
 		// desloca itens para a esquerda sobre o item removido
 			if(idx > 0 && idx <= Nitems){
-				for(int i = idx-1; i < capacidade -1; i++){
+				for(int i = idx-1; i < Nitems -1; i++){
 					items[i] = items[i+1];
 				}
 				Nitems--;
 			}else{
-				cout << "item inválido!" << endl;
+				throw underflow_error("Item Invalido");
 			}
 		}
 		

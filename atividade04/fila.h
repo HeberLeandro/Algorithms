@@ -1,6 +1,7 @@
 #ifndef _fila_H_
 #define _fila_H_
 
+#include <stdexcept>
 #include <iostream>
 using namespace std;
 
@@ -29,7 +30,7 @@ class Fila {
 				this->items[(this->inicio + this->Nitems) % this->capacidade] = item;
 				this->Nitems++;
 			}else{
-				cout << "Overflow!" << endl;
+				throw overflow_error("Overflow");
 			}
 		}
 		
@@ -38,7 +39,7 @@ class Fila {
 				this->Nitems--;			
 				return this->items[(this->inicio + 1) % this->capacidade];
 			}else {
-				cout << "Underflow!" << endl;
+				throw underflow_error("Underflow");
 			}
 		}
 		

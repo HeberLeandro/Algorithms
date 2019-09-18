@@ -1,6 +1,7 @@
 #ifndef _pilha_H_
 #define _pilha_H_
 
+#include <stdexcept>
 #include <iostream>
 using namespace std;
 
@@ -30,7 +31,7 @@ class Pilha {
 				this->Nitems += 1;
 			
 			}else{
-				cout << "Overflow!" << endl;
+				throw overflow_error("Overflow");
 			}
 		}
 		
@@ -41,7 +42,7 @@ class Pilha {
 				this->Nitems -= 1;			
 				return this->items[aux];
 			}else {
-				cout << "Underflow!" << endl;
+				throw underflow_error("Underflow");
 			}
 		}
 };
