@@ -9,7 +9,7 @@
 
 #include <thread>
 #include <chrono>
-#define PAUSA(tempo) std::this_thread::sleep_for(std::chrono::milliseconds(tempo * 1000));
+#define PAUSA(tempo) std::this_thread::sleep_for(std::chrono::milliseconds(tempo * 300));
 
 #include "fila2.h"
 
@@ -30,7 +30,7 @@ int main2() {
 		cout << "Status: " << impressora.tamanho() << " item(s) na fila" << endl;
 
 		// 50% de chance da impressora imprimir um documento
-		if ((rand() % 100) < 50) {
+		if ((rand() % 100) < 30) {
 			if (!impressora.vazia()) {
 				cout << "Imprimindo documento " << impressora.desenfileira() << endl;
 			}

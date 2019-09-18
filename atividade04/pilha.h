@@ -9,15 +9,14 @@ template <class T>
 class Pilha {
 	
 	private:
-		int capacidade, Nitems, topo;
+		int capacidade, topo;
 		T * items;
 		
 	public:
 		Pilha(int capacidade){
 			this->items = new T[capacidade];
 			this->topo =  -1;
-			this->capacidade = capacidade;
-			this->Nitems = 0;		
+			this->capacidade = capacidade;		
 		}
 		
 		~Pilha(){
@@ -25,10 +24,9 @@ class Pilha {
 		}
 		
 		void empilha(T item) {
-			if(this->Nitems < this->capacidade){
+			if(this->topo < this->capacidade-1){
 				this->topo += 1;	
 				this->items[this->topo] = item;
-				this->Nitems += 1;
 			
 			}else{
 				throw overflow_error("Overflow");
@@ -36,10 +34,9 @@ class Pilha {
 		}
 		
 		T desempilha(){
-			if(this->Nitems > 0){
+			if(this->topo >= 0){
 				int aux = this->topo;
-				this->topo -= 1;
-				this->Nitems -= 1;			
+				this->topo -= 1;			
 				return this->items[aux];
 			}else {
 				throw underflow_error("Underflow");

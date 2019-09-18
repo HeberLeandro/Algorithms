@@ -1,6 +1,7 @@
 #ifndef _lista2_H_
 #define _lista2_H_
 
+#include <stdexcept>
 #include <iostream>
 using namespace std;
 
@@ -52,7 +53,7 @@ class Lista {
 				this->final = novoNode;
 				this->Nitems++; 
 			}else {
-				cout << "Lista cheia!" << endl;
+				throw overflow_error("Overflow");
 			}
 		}
 		
@@ -69,7 +70,7 @@ class Lista {
 				return aux->dados;
 				
 			}else{
-				cout << "Item inválido!" << endl;
+				throw overflow_error("Item Invalido");
 			}
 		
 		}
@@ -98,7 +99,7 @@ class Lista {
 				}
 				this->Nitems++;
 			}else{
-				cout << "Lista cheia ou item inválido!" << endl;
+				throw overflow_error("Overflow");
 			}
 		}
 		
@@ -130,7 +131,7 @@ class Lista {
 				}
 				this->Nitems--;
 			}else{
-				cout << "item inválido!" << endl;
+				throw underflow_error("Underflow");
 			}
 		}
 		

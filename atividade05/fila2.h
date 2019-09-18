@@ -1,6 +1,7 @@
 #ifndef _fila2_H_
 #define _fila2_H_
 
+#include <stdexcept>
 #include <iostream>
 using namespace std;
 
@@ -48,7 +49,7 @@ class Fila {
 				this->final = novoNode;
 				this->Nitems++;
 			}else{
-				cout << "Overflow!" << endl;
+				throw overflow_error("Overflow");
 			}
 		}
 		
@@ -62,18 +63,16 @@ class Fila {
 				this->Nitems--;						
 				return aux->dados;
 			}else {
-				cout << "Underflow!" << endl;
+				throw underflow_error("Underflow");
 			}
 		}
 		
 		int cheia(){
-			if (this->Nitems == this->capacidade) return 1;
-			else return 0;
+			return (this->Nitems == this->capacidade);
 		}
 		
 		int vazia(){
-			if(this->Nitems == 0) return 1;
-			else return 0;
+			 return (this->Nitems == 0);
 		}
 		
 		int tamanho(){

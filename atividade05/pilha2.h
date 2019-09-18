@@ -1,6 +1,7 @@
 #ifndef _pilha2_H_
 #define _pilha2_H_
 
+#include <stdexcept>
 #include <iostream>
 using namespace std;
 
@@ -43,7 +44,7 @@ class Pilha {
 				this->topo = novoNode;	
 				this->Nitems++;
 			}else{
-				cout << "Overflow!" << endl;
+				throw overflow_error("Overflow");
 			}
 		}
 		
@@ -54,7 +55,7 @@ class Pilha {
 				this->Nitems--;			
 				return aux->dados;
 			}else {
-				cout << "Underflow!" << endl;
+				throw underflow_error("Underflow");
 			}
 		}
 };

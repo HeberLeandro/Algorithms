@@ -8,7 +8,7 @@
 #include "lista2.h"
 using namespace std;
 
-int main() {	
+int main3() {	
 	Lista<char> lista(10);
 	
 	lista.adiciona('a');	// a
