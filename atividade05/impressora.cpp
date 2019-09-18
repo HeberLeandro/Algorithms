@@ -16,23 +16,26 @@
 using namespace std;
 
 int main2() {
-	Fila<int> impressora(10);
+	FilaGenerica<int> *impressora;
+	impressora = new FilaEncadeada<int>(10);
+	//impressora = new FilaArray<int>(10);
+	
 	int i = 0;
 	while (1) {
 		// 70% de chance do usuário mandar imprimir um documento
 		if ((rand() % 100) < 70) {
-			if (!impressora.cheia()) {
+			if (!impressora->cheia()) {
 				cout << "Adicionado documento " << ++i << endl;
-				impressora.enfileira(i);
+				impressora->enfileira(i);
 			}
 		}
 
-		cout << "Status: " << impressora.tamanho() << " item(s) na fila" << endl;
+		cout << "Status: " << impressora->tamanho() << " item(s) na fila" << endl;
 
 		// 50% de chance da impressora imprimir um documento
 		if ((rand() % 100) < 30) {
-			if (!impressora.vazia()) {
-				cout << "Imprimindo documento " << impressora.desenfileira() << endl;
+			if (!impressora->vazia()) {
+				cout << "Imprimindo documento " << impressora->desenfileira() << endl;
 			}
 		}
 

@@ -6,7 +6,7 @@
 using namespace std;
 
 template <class T>
-class Pilha {
+class Pilha{
 	
 	private:
 		int capacidade, topo;

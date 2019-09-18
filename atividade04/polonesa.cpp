@@ -47,7 +47,7 @@ int polonesa(const char * exp) {
 	return pilha.desempilha();
 }
 
-int main() {
+int main1() {
 	
 	cout << polonesa("23+31-*") << endl;
 	cout << polonesa("93*42/-") << endl;

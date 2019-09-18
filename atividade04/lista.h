@@ -28,8 +28,8 @@ class Lista {
 		
 		void adiciona (const T & item) {
 		// adiciona um item ao final da lista; lança “Lista cheia” caso cheia
-			if(Nitems < capacidade){
-				items[Nitems++] = item; 
+			if(this->Nitems < this->capacidade){
+				items[this->Nitems++] = item; 
 			}else {
 				throw overflow_error("Overflow");
 			}
@@ -38,7 +38,7 @@ class Lista {
 		T pega(int idx) {
 		// pega um item pelo indice (começa em 1);
 		// lança “Item inválido” se posição inválida
-			if(idx > 0 && idx <= Nitems){
+			if(idx > 0 && idx <= this->Nitems){
 				return items[idx-1];
 			}else{
 				throw underflow_error("Item invalido");
@@ -51,12 +51,12 @@ class Lista {
 		// lança “Lista cheia” caso cheia
 		// lança “Item inválido” se posição inválida
 		// desloca itens existentes para a direita
-			if((idx > 0 && idx <= Nitems) && Nitems < capacidade){
-				for(int i = Nitems-1; i >= idx; i--){
+			if((idx > 0 && idx <= this->Nitems) && (this->Nitems < this->capacidade)){
+				for(int i = this->Nitems; i >= idx; i--){
 					items[i] = items[i-1];
 				}
 				items[idx-1] = item;
-				Nitems++;
+				this->Nitems++;
 			}else{
 				throw overflow_error("Overflow");
 			}
@@ -66,11 +66,11 @@ class Lista {
 		// remove item de uma posição indicada
 		// lança “Item inválido” se posição inválida
 		// desloca itens para a esquerda sobre o item removido
-			if(idx > 0 && idx <= Nitems){
-				for(int i = idx-1; i < Nitems -1; i++){
+			if(idx > 0 && idx <= this->Nitems){
+				for(int i = idx-1; i < this->Nitems -1; i++){
 					items[i] = items[i+1];
 				}
-				Nitems--;
+				this->Nitems--;
 			}else{
 				throw underflow_error("Item Invalido");
 			}
@@ -78,7 +78,7 @@ class Lista {
 		
 		void exibe() {
 		// exibe os itens da saida padrão separados por espaços
-			for(int i = 0; i < Nitems; i++){
+			for(int i = 0; i < this->Nitems; i++){
 				cout << items[i] << " ";
 			}
 			cout << endl;

@@ -6,28 +6,43 @@
 using namespace std;
 
 template <class T>
+class PilhaGenerica{
+	public:
+		int capacidade;
+		
+		PilhaGenerica(int cap){
+			this->capacidade = cap;
+		}
+		
+		virtual ~PilhaGenerica(){}
+		
+	 	virtual void empilha(T) = 0;
+	 	virtual T desempilha() = 0;
+};
+
+
+template <class T>
 struct Node {
 	T dados;
 	struct Node * prox;
 };
 
 template <class T>
-class Pilha {
+class PilhaEncadeada : public PilhaGenerica<T> {
 	
 	private:
-		int capacidade;
 		int Nitems; // Quantidade de Nós na pilha.
 		Node<T> *topo;
 		
 		
 	public:
-		Pilha(int capacidade){
+		PilhaEncadeada(int capacidade) : PilhaGenerica<T>(capacidade){
 			this->topo = NULL;
 			this->capacidade = capacidade;
 			this->Nitems = 0;		
 		}
 		
-		~Pilha(){
+		~PilhaEncadeada(){
 			while(this->topo != NULL){
 				Node<T> *aux = this->topo;
 				this->topo = this->topo->prox;
@@ -60,5 +75,44 @@ class Pilha {
 		}
 };
 
+template <class T>
+class PilhaArray : public PilhaGenerica<T> {
+	
+	private:
+		int  topo;
+		T * items;
+		
+	public:
+		PilhaArray(int capacidade) : PilhaGenerica<T>(capacidade){
+			this->items = new T[capacidade];
+			this->topo =  -1;
+			this->capacidade = capacidade;		
+		}
+		
+		~PilhaArray(){
+			delete [] items;
+		}
+		
+		void empilha(T item) {
+			if(this->topo < this->capacidade-1){
+				this->topo += 1;	
+				this->items[this->topo] = item;
+			
+			}else{
+				throw overflow_error("Overflow");
+			}
+		}
+		
+		T desempilha(){
+			if(this->topo >= 0){
+				int aux = this->topo;
+				this->topo -= 1;			
+				return this->items[aux];
+			}else {
+				throw underflow_error("Underflow");
+			}
+		}
+};
 
 #endif
+

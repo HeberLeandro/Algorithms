@@ -30,21 +30,24 @@ int avalia(char token, int valorEsq, int valorDir) {
 }
 
 int polonesa(const char * exp) {
-	Pilha<int> pilha(10);
+	PilhaGenerica<int> * pilha;
+	pilha = new PilhaEncadeada<int>(10);
+	//pilha = new PilhaArray<int>(10);
+	
 	while (*exp) {
 		char token = *exp;
 		if (ehOperador(token)) {
-			int valorDir = pilha.desempilha();
-			int valorEsq = pilha.desempilha();
+			int valorDir = pilha->desempilha();
+			int valorEsq = pilha->desempilha();
 			int resultado = avalia(token, valorEsq, valorDir);
-			pilha.empilha(resultado);
+			pilha->empilha(resultado);
 		} else {
 			int valor = (int)(token - '0');
-			pilha.empilha(valor);
+			pilha->empilha(valor);
 		}
 		exp++;
 	}
-	return pilha.desempilha();
+	return pilha->desempilha();
 }
 
 int main1() {
