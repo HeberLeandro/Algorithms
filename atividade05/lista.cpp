@@ -8,7 +8,7 @@
 #include "lista2.h"
 using namespace std;
 
-int main() {	
+int main3() {	
 	ListaGenerica<char> *lista;
 	lista = new ListaEncadeada<char>(10); 
 	//lista = new ListaArray<char>(10); 

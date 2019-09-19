@@ -105,6 +105,7 @@ template <class T>
 class FilaArray : public FilaGenerica<T> {
 	
 	private:
+		int inicio;
 		T * items;
 	
 	public:
@@ -130,8 +131,10 @@ class FilaArray : public FilaGenerica<T> {
 		
 		T desenfileira(){
 			if(this->Nitems > 0){
-				this->Nitems--;			
-				return this->items[(this->inicio++) % this->capacidade];
+				this->Nitems--;
+				int aux = this->inicio;	
+				this->inicio = (this->inicio + 1) % this->capacidade;
+				return this->items[aux];
 			}else {
 				throw underflow_error("Underflow");
 			}
