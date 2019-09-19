@@ -36,7 +36,11 @@ public:
 	}
 
 	void insert(T_key key, T_value value) {
-		// implementar
+		if(size < cap){
+			Node * node = new Node(hash(key), value);
+			data[size] = node;
+			size++;
+		}
 	}
 
 	T_value remove(T_key key) {
@@ -105,7 +109,7 @@ private:
 
 };
 
-int main2() {
+int main() {
 	Hashtable<string, float> notas(10, -1);
 
 	notas.insert(string("Joao"), 5);

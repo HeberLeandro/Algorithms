@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 
 using namespace std;
 
@@ -18,28 +19,36 @@ public:
 	}
 
 	void insere(int key) {
-		int posicao = -1;
-		if(tamanho < capacidade){
-			for(int i = 0; i < tamanho; i++){
-				if(items[i] > key){
-					posicao = i;
+		int aux;
+		items[tamanho++] = key;
+		while(!valida()){
+			for (int i = 0; i < tamanho - 1; i++) {
+				if (items[i] > items[i + 1]){
+					aux = items[i];
+					items[i] = items[i+1];
+					items[i+1] = aux;
 				}
-			}
-			if(posicao >= 0){
-				for(int i = tamanho-1; i >= posicao; i--){
-					items[i+1] = items[i];
-				}
-				items[posicao] = key;
-				tamanho++;
-			}else {
-				items[tamanho] = key;
-				tamanho++;
 			}
 		}
 	}
 
 	int buscaSequencial(int key) {
-		// implementar
+		int i, idx;
+		bool valorEncontrado;	
+		//percorre a lista
+		for(i = 0; i < tamanho; i++) {
+			if(items[i] == key){
+				valorEncontrado = true;
+				idx = i;
+				break;
+			}
+		}
+		
+		if(valorEncontrado) {
+		  return idx;
+		}else{
+			return -1;
+		}
 	}
 
 	int buscaBinaria(int item) {
@@ -59,17 +68,41 @@ public:
 		}
 		cout << endl;
 	}
+	
+	void remove(int idx) {
+		// remove item de uma posição indicada
+		// lança “Item inválido” se posição inválida
+		// desloca itens para a esquerda sobre o item removido
+		if(idx > 0 && idx <= this->tamanho){
+			for(int i = idx-1; i < this->tamanho -1; i++){
+				items[i] = items[i+1];
+			}
+			this->tamanho--;
+		}else{
+			throw underflow_error("Item Invalido");
+		}
+	}
 
 private:
 
 	int buscaBinaria(int inicio, int final, int item) {
-		// implementar
+		int meio;
+		while(inicio <= final){
+			meio = (inicio + final) / 2;
+			
+			if(item == items[meio]) return meio;
+			
+			if(items[meio] < item) inicio = meio + 1;
+		
+			else final = meio - 1;
+		}
+		return -1;
 	}
 
 };
 
 
-int main() {
+int main1() {
 
 	ListaOrdenada lista(10);
 
@@ -78,16 +111,17 @@ int main() {
 	for (int i = 0; i < 10; i++) {
 		lista.insere(elementos[i]);
 	}
-
+//	lista.remove(2);
+//	lista.remove(2);
+	
 	cout << "Lista válida: " << (lista.valida()?"sim":"não") << endl;
 	lista.exibe();
 
-//	int teste [] = {5, 7, 16, 99, 45, 12, 33, 1, 60, 6};
-//
-//	for (int i = 0; i < 10; i++) {
-//		cout << "Buscando " << teste[i] << ": sequencial = " << lista.buscaSequencial(teste[i]) << " binaria = " << lista.buscaBinaria(teste[i]) << endl;
-//
-//	}
+	int teste [] = {5, 7, 16, 99, 45, 12, 33, 1, 60, 6};
+
+	for (int i = 0; i < 10; i++) {
+		cout << "Buscando " << teste[i] << ": sequencial = " << lista.buscaSequencial(teste[i]) << " binaria = " << lista.buscaBinaria(teste[i]) << endl;
+	}
 	return 0;
 } 
 
