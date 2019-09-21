@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <stdexcept>
 
 using namespace std;
 
@@ -36,19 +37,42 @@ public:
 	}
 
 	void insert(T_key key, T_value value) {
-		if(size < cap){
-			Node * node = new Node(hash(key), value);
-			data[size] = node;
-			size++;
+		//cout << "rash: " << this->hash(key) << endl;
+		if(this->size < this->cap){
+			int idx = this->hash(key);
+			if(data[idx] == NULL){
+				data[idx] = new Node(key, value);
+				this->size++;
+			}else{
+				Node * No = data[idx];
+				while(No->next != NULL){
+					No = No->next;
+				}
+				this->insert(No, key, value);
+//				No->next = new Node(key, value);
+				this->size++;
+			}
+			
+		}else {
+			throw overflow_error("Overflow");
 		}
 	}
 
 	T_value remove(T_key key) {
-		// implementar
+		if(this->size > 0){
+			int idx = this->hash(key);
+			this->remove(data[idx], key);
+			this->size--;
+		}else {
+			throw underflow_error("Underflow");
+		}
 	}
 
 	T_value search(T_key key) {
-		// implementar
+		if(this->size > 0){
+			int idx = this->hash(key);
+			this->search(data[idx], key);
+		}
 	}
 
 	void show() {
@@ -61,14 +85,16 @@ public:
 
 private:
 	int hash(int x) {
-		return x;
+		return x % this->cap;
 	}
 
 	int hash(string key) {
 		const char * str = key.c_str();
 		int hash = 1;
-		while (*str) hash *= *str++;
+		while (*str) hash = (*str++ + hash) % this->cap;
 		return hash;
+//		while (*str) hash *= *str++;
+//		return hash;
 	}
 
 	void show(Node * node) {
@@ -80,8 +106,8 @@ private:
 
 	void insert(Node * &node, T_key key, T_value value) {
 		Node * tmp = new Node(key, value);
-		tmp->next = node;
-		node = tmp;
+		//tmp->next = node;
+		node->next = tmp;
 	}
 
 	T_value remove(Node * &node, T_key key) {
@@ -118,10 +144,11 @@ int main() {
 	notas.insert(string("Tereza"), 7.5);
 	notas.insert(string("Victor"), 8);
 	notas.insert(string("Mario"), 4);
+	
 
 	cout << "TABELA: " << endl;
 	notas.show();
-
+	//cout << "Removido: " << notas.remove("Larissa") <<endl;
 
 	cout << endl;
 

@@ -20,15 +20,19 @@ public:
 
 	void insere(int key) {
 		int aux;
-		items[tamanho++] = key;
-		while(!valida()){
-			for (int i = 0; i < tamanho - 1; i++) {
-				if (items[i] > items[i + 1]){
-					aux = items[i];
-					items[i] = items[i+1];
-					items[i+1] = aux;
+		if(this->tamanho < this->capacidade){
+			items[tamanho++] = key;
+			while(!valida()){
+				for (int i = 0; i < tamanho - 1; i++) {
+					if (items[i] > items[i + 1]){
+						aux = items[i];
+						items[i] = items[i+1];
+						items[i+1] = aux;
+					}
 				}
 			}
+		}else {
+			throw overflow_error("Overflow");
 		}
 	}
 
