@@ -43,6 +43,7 @@ void noopsort(int * array, int size) {
 
 
 void bubblesort(int * array, int size) {
+	//TO DO
 	while(!validate(array, size)){
 		for (int i = 0; i < size - 1; i++) {
 			if (array[i] > array[i + 1]){
@@ -54,6 +55,7 @@ void bubblesort(int * array, int size) {
 
 
 void selectionsort(int * array, int size) {
+	//TO DO
 	int min;
 	for (int i = 0; i < size; i++) {
 		min = i;
@@ -72,8 +74,8 @@ void insertionsort(int * array, int size) {
 }
 
 void merge(int * target, int * buffer, int start, int mid, int finish) {
+	//TO DO
 	int inicio = start, meio = mid;
-	//conflito nas variaveis start e mid
 	for(int i = start;i <= finish; i++){
 		if(inicio <= mid-1 && meio <= finish){
 			if(buffer[inicio] <= buffer[meio]){
@@ -110,7 +112,15 @@ void mergesort(int * array, int size) {
 
 int partition(int * array, int start, int finish) {
 	//TO DO
-	return 0;
+	int pivo = array[finish];
+	int P = start-1;
+	for(int i = start; i <= finish; i++){
+		if(array[i] <= pivo){
+			P++;
+			swap(array[i], array[P]);
+		}	
+	}
+	return P;
 }
 
 void quicksort(int * array, int start, int finish) {
@@ -136,7 +146,7 @@ void show(int * array, int size, const char * name, void function(int *, int), i
 	long elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(finish-start).count() / 1000;
 
 	int valid = validate(copy, size);
-	cout << name << ": " << (valid?"ok":"erro") << " (tempo[us] = " << elapsed << ") ";
+	cout << name << ": " << (valid?"ok":"erro") << " (tempo[us] = " << elapsed << ") "; //<< endl;
 
 	if (printFlag) print(copy, size);
 	delete [] copy;
@@ -151,14 +161,13 @@ int main() {
 	for (int i = 0; i < size; i++) {
 		array[i] = rand() % size;
 	}
-
+	
 	show(array, size, "NoOpSort     ", noopsort, print);
 	show(array, size, "BubbleSort   ", bubblesort, print);
 	show(array, size, "SelectionSort", selectionsort, print);
 	show(array, size, "InsertionSort", insertionsort, print);
 	show(array, size, "MergeSort    ", mergesort, print);
 	show(array, size, "QuickSort    ", quicksort, print);
-
 	delete [] array;
 }
 
