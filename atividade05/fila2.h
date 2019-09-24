@@ -24,19 +24,16 @@ class FilaGenerica{
 };
 
 
-
-template <class T>
-struct Node {
-	T dados;
-	struct Node * prox;
-};
-
 template <class T>
 class FilaEncadeada : public FilaGenerica<T>{
 	
 	private:
-		Node<T> *inicio;
-		Node<T> *final;
+		struct Node {
+			T dados;
+			struct Node * prox;
+		};
+		Node *inicio;
+		Node *final;
 	
 	public:
 		FilaEncadeada(int capacidade) : FilaGenerica<T>(capacidade){
@@ -47,17 +44,16 @@ class FilaEncadeada : public FilaGenerica<T>{
 		}
 		
 		~FilaEncadeada(){
-			while(this->inicio != NULL){
-				Node<T> *aux = this->inicio;
-				this->inicio = this->inicio->prox;
-				delete aux;
+			while(this->Nitems > 0){
+				desenfileira();
 			}
 			delete this->inicio;
+			delete this->final;
 		}
 		
 		void enfileira(const T & item){
 			if(this->Nitems < this->capacidade){
-				Node<T> *novoNode = new Node<T>;
+				Node *novoNode = new Node;
 				novoNode->dados = item;
 				novoNode->prox = NULL;
 				if(this->inicio == NULL){
@@ -74,7 +70,7 @@ class FilaEncadeada : public FilaGenerica<T>{
 		
 		T desenfileira(){
 			if(this->Nitems > 0){
-				Node<T> *aux = this->inicio;
+				Node *aux = this->inicio;
 				this->inicio = this->inicio->prox;
 				if(this->inicio == NULL){
 					this->final = NULL;

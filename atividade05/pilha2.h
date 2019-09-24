@@ -20,17 +20,15 @@ class PilhaGenerica{
 
 
 template <class T>
-struct Node {
-	T dados;
-	struct Node * prox;
-};
-
-template <class T>
 class PilhaEncadeada : public PilhaGenerica<T> {
 	
 	private:
+		struct Node {
+			T dados;
+			struct Node * prox;
+		};
 		int Nitems; // Quantidade de Nós na pilha.
-		Node<T> *topo;
+		Node *topo;
 		
 		
 	public:
@@ -41,17 +39,15 @@ class PilhaEncadeada : public PilhaGenerica<T> {
 		}
 		
 		~PilhaEncadeada(){
-			while(this->topo != NULL){
-				Node<T> *aux = this->topo;
-				this->topo = this->topo->prox;
-				delete aux;
+			while(this->Nitems > 0){
+				desempilha();
 			}
 			delete topo;
 		}
 		
 		void empilha(T item) {
 			if(this->Nitems < this->capacidade){
-				Node<T> *novoNode = new Node<T>;
+				Node *novoNode = new Node;
 				novoNode->dados = item;
 				novoNode->prox = this->topo;
 				this->topo = novoNode;	
@@ -63,7 +59,7 @@ class PilhaEncadeada : public PilhaGenerica<T> {
 		
 		T desempilha(){
 			if(this->Nitems > 0){
-				Node<T> *aux = this->topo;
+				Node *aux = this->topo;
 				this->topo = this->topo->prox;
 				this->Nitems--;			
 				return aux->dados;

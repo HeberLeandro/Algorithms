@@ -37,7 +37,6 @@ public:
 	}
 
 	void insert(T_key key, T_value value) {
-		//cout << "rash: " << this->hash(key) << endl;
 		if(this->size < this->cap){
 			int idx = this->hash(key);
 			if(data[idx] == NULL){
@@ -49,7 +48,6 @@ public:
 					No = No->next;
 				}
 				this->insert(No, key, value);
-//				No->next = new Node(key, value);
 				this->size++;
 			}
 			
@@ -135,7 +133,7 @@ private:
 
 };
 
-int main() {
+int main1() {
 	Hashtable<string, float> notas(10, -1);
 
 	notas.insert(string("Joao"), 5);

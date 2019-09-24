@@ -25,18 +25,18 @@ class ListaGenerica{
 };
 
 
-template <class T>
-struct Node {
-	T dados;
-	struct Node * prox;
-};
+
 
 template <class T>
 class ListaEncadeada : public ListaGenerica<T> {
 	
 	private:
-		Node<T> *inicio;
-		Node<T> *final;
+		struct Node {
+			T dados;
+			struct Node * prox;
+		};
+		Node *inicio;
+		Node *final;
 	
 	public:
 		ListaEncadeada(int capacidade) : ListaGenerica<T>(capacidade) {
@@ -50,18 +50,17 @@ class ListaEncadeada : public ListaGenerica<T> {
 		
 		~ListaEncadeada() {
 		//destruição do array
-			while(this->inicio != NULL){
-				Node<T> *aux = this->inicio;
-				this->inicio = this->inicio->prox;
-				delete aux;
+			while(this->Nitems > 0){
+				remove(this->Nitems);
 			}
 			delete this->inicio;
+			delete this->final;
 		}
 		
 		void adiciona (const T & item) {
 		// adiciona um item ao final da lista; lança “Lista cheia” caso cheia
 			if(this->Nitems < this->capacidade){
-				Node<T> *novoNode = new Node<T>;
+				Node *novoNode = new Node;
 				novoNode->dados = item;
 				novoNode->prox = NULL;
 				if(this->inicio == NULL){
@@ -80,7 +79,7 @@ class ListaEncadeada : public ListaGenerica<T> {
 		// pega um item pelo indice (começa em 1);
 		// lança “Item inválido” se posição inválida
 			if(idx > 0 && idx <= this->Nitems){
-				Node<T> *aux = this->inicio;
+				Node *aux = this->inicio;
 				idx -= 1;
 				while(idx > 0){
 					aux = aux->prox;
@@ -100,14 +99,14 @@ class ListaEncadeada : public ListaGenerica<T> {
 		// lança “Item inválido” se posição inválida
 		// desloca itens existentes para a direita
 			if((idx > 0 && idx <= this->Nitems) && (this->Nitems < this->capacidade)){
-				Node<T> *novoNode = new Node<T>;
+				Node *novoNode = new Node;
 				novoNode->dados = item;
 				novoNode->prox = NULL;
 				if(idx == 1){
 					novoNode->prox = this->inicio;
 					this->inicio = novoNode;
 				}else {
-					Node<T> *aux = this->inicio;
+					Node *aux = this->inicio;
 					idx -= 2;
 					while(idx > 0) {
 						aux = aux->prox;
@@ -127,7 +126,7 @@ class ListaEncadeada : public ListaGenerica<T> {
 		// lança “Item inválido” se posição inválida
 		// desloca itens para a esquerda sobre o item removido
 			if(idx > 0 && idx <= this->Nitems){
-				Node<T> *aux;
+				Node *aux;
 				if(idx == 1){
 					aux = this->inicio;
 					this->inicio = this->inicio->prox;
@@ -136,7 +135,7 @@ class ListaEncadeada : public ListaGenerica<T> {
 					}
 				}else {
 					aux = this->inicio;//aux = anterior
-					Node<T> *tmp;
+					Node *tmp;
 					idx -= 2;
 					while(idx > 0) {
 						aux = aux->prox;
@@ -156,7 +155,7 @@ class ListaEncadeada : public ListaGenerica<T> {
 		
 		void exibe() {
 		// exibe os itens da saida padrão separados por espaços
-			Node<T> *aux = this->inicio;
+			Node *aux = this->inicio;
 			int i = this->Nitems;
 			while(i > 0){
 				cout << aux->dados << " ";

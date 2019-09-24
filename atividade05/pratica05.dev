@@ -51,16 +51,6 @@ AutoIncBuildNr=0
 SyncProduct=1
 
 [Unit4]
-FileName=fila2.h
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit5]
 FileName=lista2.h
 CompileCpp=1
 Folder=
@@ -70,7 +60,7 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit6]
+[Unit5]
 FileName=pilha2.h
 CompileCpp=1
 Folder=
@@ -91,7 +81,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit2]
-FileName=lista.cpp
+FileName=polonesa.cpp
 CompileCpp=1
 Folder=
 Compile=1
@@ -101,7 +91,17 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit3]
-FileName=polonesa.cpp
+FileName=fila2.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit6]
+FileName=lista.cpp
 CompileCpp=1
 Folder=
 Compile=1

@@ -19,27 +19,23 @@ public:
 	}
 
 	void insere(int key) {
-		bool ehMenor = false;
 		if(this->tamanho < this->capacidade){
 			if(this->tamanho == 0){
 				this->items[0] = key;
 				tamanho++;
 			}else{
-				for(int i = 0; i < this->capacidade; i++){
+				for(int i = 0; i < this->tamanho; i++){
 					if(key <= items[i]){
-						for(int j = this->capacidade - 1; j >= i; j--){
+						for(int j = this->tamanho - 1; j >= i; j--){
 							items[j+1] = items[j];
 						}
-						ehMenor = true;
 						items[i] = key;	
 						this->tamanho++;
-						break;					
+						return;					
 					}
 				}
-				if(!ehMenor){
-					items[this->tamanho] = key;
-					this->tamanho++;
-				}
+				items[this->tamanho] = key;
+				this->tamanho++;	
 			}
 		}else {
 			throw overflow_error("Overflow");
@@ -58,11 +54,8 @@ public:
 			}
 		}
 		
-		if(valorEncontrado) {
-		  return idx;
-		}else{
-			return -1;
-		}
+		if(valorEncontrado) return idx;
+		else return -1;
 	}
 
 	int buscaBinaria(int item) {
@@ -116,10 +109,10 @@ private:
 };
 
 
-int main() {
+int main2() {
 
 	ListaOrdenada lista(10);
-
+	//int elementos [] = {10, 5, 25, 1, 5};
 	int elementos [] = {10, 5, 25, 1, 5, 13, 50, 99, 33, 12};
 
 	for (int i = 0; i < 10; i++) {
@@ -128,7 +121,7 @@ int main() {
 //	lista.remove(2);
 //	lista.remove(2);
 	
-	cout << "Lista válida: " << (lista.valida()?"sim":"não") << endl;
+	cout << "Lista valida: " << (lista.valida()?"sim":"não") << endl;
 	lista.exibe();
 
 	int teste [] = {5, 7, 16, 99, 45, 12, 33, 1, 60, 6};
