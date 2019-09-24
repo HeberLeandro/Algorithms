@@ -57,6 +57,4 @@ class Fila {
 		}
 };
 
-
-
 #endif

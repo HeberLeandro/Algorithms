@@ -19,16 +19,26 @@ public:
 	}
 
 	void insere(int key) {
-		int aux;
+		bool ehMenor = false;
 		if(this->tamanho < this->capacidade){
-			items[tamanho++] = key;
-			while(!valida()){
-				for (int i = 0; i < tamanho - 1; i++) {
-					if (items[i] > items[i + 1]){
-						aux = items[i];
-						items[i] = items[i+1];
-						items[i+1] = aux;
+			if(this->tamanho == 0){
+				this->items[0] = key;
+				tamanho++;
+			}else{
+				for(int i = 0; i < this->capacidade; i++){
+					if(key <= items[i]){
+						for(int j = this->capacidade - 1; j >= i; j--){
+							items[j+1] = items[j];
+						}
+						ehMenor = true;
+						items[i] = key;	
+						this->tamanho++;
+						break;					
 					}
+				}
+				if(!ehMenor){
+					items[this->tamanho] = key;
+					this->tamanho++;
 				}
 			}
 		}else {
@@ -106,7 +116,7 @@ private:
 };
 
 
-int main1() {
+int main() {
 
 	ListaOrdenada lista(10);
 

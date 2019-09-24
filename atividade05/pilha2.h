@@ -13,9 +13,7 @@ class PilhaGenerica{
 		PilhaGenerica(int cap){
 			this->capacidade = cap;
 		}
-		
 		virtual ~PilhaGenerica(){}
-		
 	 	virtual void empilha(T) = 0;
 	 	virtual T desempilha() = 0;
 };

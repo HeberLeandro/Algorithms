@@ -15,7 +15,7 @@ class Pilha{
 	public:
 		Pilha(int capacidade){
 			this->items = new T[capacidade];
-			this->topo =  -1;
+			this->topo = -1;
 			this->capacidade = capacidade;		
 		}
 		
