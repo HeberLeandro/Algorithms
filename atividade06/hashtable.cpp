@@ -43,11 +43,7 @@ public:
 				data[idx] = new Node(key, value);
 				this->size++;
 			}else{
-				Node * No = data[idx];
-				while(No->next != NULL){
-					No = No->next;
-				}
-				this->insert(No, key, value);
+				this->insert(data[idx], key, value);
 				this->size++;
 			}
 			
@@ -104,7 +100,7 @@ private:
 
 	void insert(Node * &node, T_key key, T_value value) {
 		Node * tmp = new Node(key, value);
-		//tmp->next = node;
+		tmp->next = node->next;
 		node->next = tmp;
 	}
 
@@ -133,7 +129,7 @@ private:
 
 };
 
-int main() {
+int main1() {
 	Hashtable<string, float> notas(10, -1);
 
 	notas.insert(string("Joao"), 5);

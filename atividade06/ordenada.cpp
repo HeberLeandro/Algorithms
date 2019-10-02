@@ -22,15 +22,20 @@ public:
 		if(this->tamanho < this->capacidade){
 			if(this->tamanho == 0){
 				this->items[0] = key;
-				tamanho++;
+				this->tamanho++;
 			}else{
 				for(int i = this->tamanho-1; i >= 0; i--){
-					if(items[i] < key) {
+					if(key >= items[i]) {
 						items[i+1] = key;
 						this->tamanho++;
 						return;	
 					}
 					items[i+1] = items[i];
+					if(i == 0) {
+						items[0] = key;
+						this->tamanho++;
+						return;
+					}
 				} 	
 			}
 		}else {
@@ -67,7 +72,7 @@ public:
 
 	void exibe() {
 		for (int i = 0; i < tamanho; i++) {
-			cout << i << ": " << items[i] << "; ";
+			cout << i << ": " << items[i] << "; "<< endl;
 		}
 		cout << endl;
 	}
@@ -120,11 +125,11 @@ int main2() {
 	cout << "Lista valida: " << (lista.valida()?"sim":"não") << endl;
 	lista.exibe();
 
-//	int teste [] = {5, 7, 16, 99, 45, 12, 33, 1, 60, 6};
-//
-//	for (int i = 0; i < 10; i++) {
-//		cout << "Buscando " << teste[i] << ": sequencial = " << lista.buscaSequencial(teste[i]) << " binaria = " << lista.buscaBinaria(teste[i]) << endl;
-//	}
+	int teste [] = {5, 7, 16, 99, 45, 12, 33, 1, 60, 6};
+
+	for (int i = 0; i < 10; i++) {
+		cout << "Buscando " << teste[i] << ": sequencial = " << lista.buscaSequencial(teste[i]) << " binaria = " << lista.buscaBinaria(teste[i]) << endl;
+	}
 	return 0;
 } 
 
