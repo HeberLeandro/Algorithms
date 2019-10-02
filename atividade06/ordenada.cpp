@@ -24,18 +24,14 @@ public:
 				this->items[0] = key;
 				tamanho++;
 			}else{
-				for(int i = 0; i < this->tamanho; i++){
-					if(key <= items[i]){
-						for(int j = this->tamanho - 1; j >= i; j--){
-							items[j+1] = items[j];
-						}
-						items[i] = key;	
+				for(int i = this->tamanho-1; i >= 0; i--){
+					if(items[i] < key) {
+						items[i+1] = key;
 						this->tamanho++;
-						return;					
+						return;	
 					}
-				}
-				items[this->tamanho] = key;
-				this->tamanho++;	
+					items[i+1] = items[i];
+				} 	
 			}
 		}else {
 			throw overflow_error("Overflow");
@@ -124,11 +120,11 @@ int main2() {
 	cout << "Lista valida: " << (lista.valida()?"sim":"não") << endl;
 	lista.exibe();
 
-	int teste [] = {5, 7, 16, 99, 45, 12, 33, 1, 60, 6};
-
-	for (int i = 0; i < 10; i++) {
-		cout << "Buscando " << teste[i] << ": sequencial = " << lista.buscaSequencial(teste[i]) << " binaria = " << lista.buscaBinaria(teste[i]) << endl;
-	}
+//	int teste [] = {5, 7, 16, 99, 45, 12, 33, 1, 60, 6};
+//
+//	for (int i = 0; i < 10; i++) {
+//		cout << "Buscando " << teste[i] << ": sequencial = " << lista.buscaSequencial(teste[i]) << " binaria = " << lista.buscaBinaria(teste[i]) << endl;
+//	}
 	return 0;
 } 
 

@@ -42,7 +42,6 @@ class PilhaEncadeada : public PilhaGenerica<T> {
 			while(this->Nitems > 0){
 				desempilha();
 			}
-			delete topo;
 		}
 		
 		void empilha(T item) {
@@ -61,8 +60,10 @@ class PilhaEncadeada : public PilhaGenerica<T> {
 			if(this->Nitems > 0){
 				Node *aux = this->topo;
 				this->topo = this->topo->prox;
-				this->Nitems--;			
-				return aux->dados;
+				T dados = aux->dados;
+				delete aux;	
+				this->Nitems--;		
+				return dados;
 			}else {
 				throw underflow_error("Underflow");
 			}

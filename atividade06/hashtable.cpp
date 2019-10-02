@@ -133,7 +133,7 @@ private:
 
 };
 
-int main1() {
+int main() {
 	Hashtable<string, float> notas(10, -1);
 
 	notas.insert(string("Joao"), 5);

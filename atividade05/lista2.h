@@ -49,12 +49,10 @@ class ListaEncadeada : public ListaGenerica<T> {
 		
 		
 		~ListaEncadeada() {
-		//destruição do array
+		//destruição do array		
 			while(this->Nitems > 0){
-				remove(this->Nitems);
+				remove(1);
 			}
-			delete this->inicio;
-			delete this->final;
 		}
 		
 		void adiciona (const T & item) {
@@ -90,7 +88,6 @@ class ListaEncadeada : public ListaGenerica<T> {
 			}else{
 				throw overflow_error("Item Invalido");
 			}
-		
 		}
 		
 		void insere (int idx, const T & item) {
@@ -98,59 +95,59 @@ class ListaEncadeada : public ListaGenerica<T> {
 		// lança “Lista cheia” caso cheia
 		// lança “Item inválido” se posição inválida
 		// desloca itens existentes para a direita
-			if((idx > 0 && idx <= this->Nitems) && (this->Nitems < this->capacidade)){
-				Node *novoNode = new Node;
-				novoNode->dados = item;
-				novoNode->prox = NULL;
-				if(idx == 1){
-					novoNode->prox = this->inicio;
-					this->inicio = novoNode;
-				}else {
-					Node *aux = this->inicio;
-					idx -= 2;
-					while(idx > 0) {
-						aux = aux->prox;
-						idx--;
-					}
-					novoNode->prox = aux->prox;
-					aux->prox = novoNode;
+			if(idx < 0 || idx > this->Nitems) throw underflow_error("Item inválido");
+			
+			else if (this->Nitems > this->capacidade) throw overflow_error("Overflow");
+			
+			Node *novoNode = new Node;
+			novoNode->dados = item;
+			novoNode->prox = NULL;
+			if(idx == 1){
+				novoNode->prox = this->inicio;
+				this->inicio = novoNode;
+			}else {
+				Node *aux = this->inicio;
+				idx -= 2;
+				while(idx > 0) {
+					aux = aux->prox;
+					idx--;
 				}
-				this->Nitems++;
-			}else{
-				throw overflow_error("Overflow");
+				novoNode->prox = aux->prox;
+				aux->prox = novoNode;
 			}
+				this->Nitems++;
 		}
 		
 		void remove(int idx) {
 		// remove item de uma posição indicada
 		// lança “Item inválido” se posição inválida
 		// desloca itens para a esquerda sobre o item removido
-			if(idx > 0 && idx <= this->Nitems){
-				Node *aux;
-				if(idx == 1){
-					aux = this->inicio;
-					this->inicio = this->inicio->prox;
-					if(aux == this->final){
-						this->final = NULL;
-					}
-				}else {
-					aux = this->inicio;//aux = anterior
-					Node *tmp;
-					idx -= 2;
-					while(idx > 0) {
-						aux = aux->prox;
-						idx--;
-					}
-					tmp = aux->prox;
-					aux->prox = tmp->prox;
-					if(this->final == tmp){
-						this->final = aux;
-					}	
+			if(idx < 0 || idx > this->Nitems) throw underflow_error("Item invalido");
+			
+			Node *aux;
+			if(idx == 1){
+				aux = this->inicio;
+				this->inicio = this->inicio->prox;
+				if(aux == this->final){
+					this->final = NULL;
 				}
-				this->Nitems--;
-			}else{
-				throw underflow_error("Underflow");
+				delete aux;
+			}else {
+				aux = this->inicio;//aux = anterior
+				Node *tmp;
+				idx -= 2;
+				while(idx > 0) {
+					aux = aux->prox;
+					idx--;
+				}
+				tmp = aux->prox;
+				aux->prox = tmp->prox;
+				if(this->final == tmp){
+					this->final = aux;
+				}
+				delete tmp;	
 			}
+			this->Nitems--;
 		}
 		
 		void exibe() {

@@ -47,8 +47,6 @@ class FilaEncadeada : public FilaGenerica<T>{
 			while(this->Nitems > 0){
 				desenfileira();
 			}
-			delete this->inicio;
-			delete this->final;
 		}
 		
 		void enfileira(const T & item){
@@ -75,8 +73,10 @@ class FilaEncadeada : public FilaGenerica<T>{
 				if(this->inicio == NULL){
 					this->final = NULL;
 				}
+				T dados = aux->dados;
+				delete aux;
 				this->Nitems--;						
-				return aux->dados;
+				return dados;
 			}else {
 				throw underflow_error("Underflow");
 			}
