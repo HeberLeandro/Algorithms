@@ -19,27 +19,15 @@ public:
 	}
 
 	void insere(int key) {
-		if(this->tamanho < this->capacidade){
-			if(this->tamanho == 0){
-				this->items[0] = key;
-				this->tamanho++;
-			}else{
-				for(int i = this->tamanho-1; i >= 0; i--){
-					if(key >= items[i]) {
-						items[i+1] = key;
-						this->tamanho++;
-						return;	
-					}
-					items[i+1] = items[i];
-					if(i == 0) {
-						items[0] = key;
-						this->tamanho++;
-						return;
-					}
-				} 	
-			}
-		}else {
-			throw overflow_error("Overflow");
+		if(this->tamanho >= this->capacidade) throw overflow_error("Overflow");
+		else {
+			int i;
+			for(i = this->tamanho-1; i >= 0; i--){
+				if(key >= items[i]) break;	
+				items[i+1] = items[i];
+			} 
+			items[i+1] = key;
+			this->tamanho++;
 		}
 	}
 
@@ -110,7 +98,7 @@ private:
 };
 
 
-int main2() {
+int main1() {
 
 	ListaOrdenada lista(10);
 	//int elementos [] = {10, 5, 25, 1, 5};

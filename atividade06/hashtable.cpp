@@ -39,14 +39,8 @@ public:
 	void insert(T_key key, T_value value) {
 		if(this->size < this->cap){
 			int idx = this->hash(key);
-			if(data[idx] == NULL){
-				data[idx] = new Node(key, value);
-				this->size++;
-			}else{
-				this->insert(data[idx], key, value);
-				this->size++;
-			}
-			
+			this->insert(data[idx], key, value);
+			this->size++;
 		}else {
 			throw overflow_error("Overflow");
 		}
@@ -55,17 +49,20 @@ public:
 	T_value remove(T_key key) {
 		if(this->size > 0){
 			int idx = this->hash(key);
-			this->remove(data[idx], key);
+			T_value aux = this->remove(data[idx], key);
 			this->size--;
+			return aux;
 		}else {
 			throw underflow_error("Underflow");
 		}
 	}
 
 	T_value search(T_key key) {
-		if(this->size > 0){
+		if(this->size == 0) throw underflow_error("Underflow");
+		else {
 			int idx = this->hash(key);
-			this->search(data[idx], key);
+			T_value aux = this->search(data[idx], key);
+			return aux;
 		}
 	}
 
@@ -87,8 +84,6 @@ private:
 		int hash = 1;
 		while (*str) hash = (*str++ + hash) % this->cap;
 		return hash;
-//		while (*str) hash *= *str++;
-//		return hash;
 	}
 
 	void show(Node * node) {
@@ -100,8 +95,8 @@ private:
 
 	void insert(Node * &node, T_key key, T_value value) {
 		Node * tmp = new Node(key, value);
-		tmp->next = node->next;
-		node->next = tmp;
+		tmp->next = node;
+		node = tmp;
 	}
 
 	T_value remove(Node * &node, T_key key) {
@@ -129,7 +124,7 @@ private:
 
 };
 
-int main1() {
+int main() {
 	Hashtable<string, float> notas(10, -1);
 
 	notas.insert(string("Joao"), 5);

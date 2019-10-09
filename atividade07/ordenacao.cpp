@@ -44,13 +44,16 @@ void noopsort(int * array, int size) {
 
 void bubblesort(int * array, int size) {
 	//TO DO
-	while(!validate(array, size)){
+	bool troca;
+	do{
+		troca = false;
 		for (int i = 0; i < size - 1; i++) {
 			if (array[i] > array[i + 1]){
 				swap(array[i], array[i + 1]);
+				troca = true;
 			}
 		}
-	}
+	}while(troca);
 }
 
 
@@ -153,7 +156,7 @@ void show(int * array, int size, const char * name, void function(int *, int), i
 }
 
 int main() {
-	int size = 10;
+	int size = 15;
 	int print = 1;
 
 	int * array = new int[size];
@@ -165,7 +168,7 @@ int main() {
 	show(array, size, "NoOpSort     ", noopsort, print);
 	show(array, size, "BubbleSort   ", bubblesort, print);
 	show(array, size, "SelectionSort", selectionsort, print);
-	show(array, size, "InsertionSort", insertionsort, print);
+	//show(array, size, "InsertionSort", insertionsort, print);
 	show(array, size, "MergeSort    ", mergesort, print);
 	show(array, size, "QuickSort    ", quicksort, print);
 	delete [] array;
