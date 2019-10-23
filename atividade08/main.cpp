@@ -41,8 +41,8 @@ int main() {
 	int sorted [10] = {1, 7, 10, 16, 17, 22, 35, 45, 62, 88}; // ordem natural, para testes
 	int size = 10;
 
-	BinaryTree * tree = new BinaryTree();
-	//BinaryTree * tree = new AVLTree();
+	//BinaryTree * tree = new BinaryTree();
+	BinaryTree * tree = new AVLTree();
 
 	try {
 
@@ -68,12 +68,12 @@ int main() {
 			cout << "Predecessor of " << val << " == " << pred << "? " << ((tree->predecessor(val) == pred)?"YES":"NO") << endl;
 		}
 
-//		cout << "Testing Search and Remove:" << endl;
-//		for (int i = 0; i < size; i++) {
-//			int val = sorted[i];
-//
-//			searchRemoveShow(*tree, val, 1);
-//		}
+		cout << "Testing Search and Remove:" << endl;
+		for (int i = 0; i < size; i++) {
+			int val = sorted[i];
+
+			searchRemoveShow(*tree, val, 1);
+		}
 
 
 	} catch (const char * msg) {

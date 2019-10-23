@@ -62,13 +62,25 @@ BinaryTree::Node * AVLTree::rebalance(Node * root) {
 
 // Realiza a rotação a esquerda sobre "root" retornando a nova raiz
 BinaryTree::Node * AVLTree::rotateLeft(Node * root) {
-	// TODO
+	Node * tmp = root; // tmp = Antigo Root
+	root = root->right; 
+	tmp->right = root->left;
+	root->left = tmp;
+	updateH(tmp);
+	updateH(root);
+	
 	return root;
 }
 
 // Realiza a rotação a direita sobre "root" retornando a nova raiz
 BinaryTree::Node * AVLTree::rotateRight(Node * root) {
-	// TODO
+	Node * tmp = root; // tmp = Antigo Root
+	root = root->left; 
+	tmp->left = root->right;
+	root->right = tmp;
+	updateH(tmp);
+	updateH(root);
+	
 	return root;
 }
 
