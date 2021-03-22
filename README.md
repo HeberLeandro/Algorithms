@@ -1,2 +1,2 @@
 # Algorithms.
-Examples of algorithms.
+Activities from Algorithms and Data Structures Discipline.
